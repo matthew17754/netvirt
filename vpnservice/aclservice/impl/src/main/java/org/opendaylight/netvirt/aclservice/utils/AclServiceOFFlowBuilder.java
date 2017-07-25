@@ -371,7 +371,8 @@ public class AclServiceOFFlowBuilder {
             return portMap;
         }
         String binaryNoOfPorts = Integer.toBinaryString(noOfPorts);
-        if (binaryNoOfPorts.length() > 16) { // TODO: replace with infrautils.counter in case of high repetitive usage
+        // TODO: replace with infrautils.counter in case of high repetitive usage
+        if (binaryNoOfPorts.length() > 16) { 
             LOG.warn("Cannot convert port range into a set of masked port ranges - Illegal port range {}-{}", portMin,
                     portMax);
             return portMap;
