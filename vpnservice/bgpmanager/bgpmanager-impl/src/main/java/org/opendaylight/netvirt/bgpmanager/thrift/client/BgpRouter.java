@@ -153,7 +153,8 @@ public class BgpRouter {
 
     static BgpRouter makeTestingRouter(BgpConfigurator.Client bgpClient) { // FOR UNIT TESTS ONLY
         return new BgpRouter(bgpClient);
-    } // static factory makeTestingRouter
+     // static factory makeTestingRouter
+    } 
 
     private static BgpRouter br = null;
 
