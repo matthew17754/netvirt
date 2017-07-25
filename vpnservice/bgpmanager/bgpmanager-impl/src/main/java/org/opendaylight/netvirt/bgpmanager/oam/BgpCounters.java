@@ -57,13 +57,15 @@ public class BgpCounters extends TimerTask {
     public BgpCounters(String mipAddress) {
         bgpSdncMip = mipAddress;
     }
-
+    
+    String cmdBGPsummary = "cmd_ip_bgp_summary.txt";
+    
     @Override
     public void run() {
         try {
             LOG.debug("Fetching counters from BGP");
             resetCounters();
-            fetchCmdOutputs("cmd_ip_bgp_summary.txt", "show ip bgp summary");
+            fetchCmdOutputs(cmdBGPsummary, "show ip bgp summary");
             fetchCmdOutputs("cmd_bgp_ipv4_unicast_statistics.txt", "show bgp ipv4 unicast statistics");
             fetchCmdOutputs(BGP_VPNV4_FILE, "show ip bgp vpnv4 all");
             fetchCmdOutputs(BGP_VPNV6_FILE, "show ip bgp vpnv6 all");
@@ -218,7 +220,7 @@ public class BgpCounters extends TimerTask {
      */
 
     private void parseIpBgpSummary() {
-        File file = new File("cmd_ip_bgp_summary.txt");
+        File file = new File(cmdBGPsummary);
 
         try (Scanner scanner = new Scanner(file)) {
             boolean startEntries = false;
@@ -428,7 +430,7 @@ public class BgpCounters extends TimerTask {
 
     private void resetCounters() {
         countersMap.clear();
-        resetFile("cmd_ip_bgp_summary.txt");
+        resetFile(cmdBGPsummary);
         resetFile("cmd_bgp_ipv4_unicast_statistics.txt");
         resetFile(BGP_VPNV4_FILE);
         resetFile(BGP_VPNV6_FILE);
