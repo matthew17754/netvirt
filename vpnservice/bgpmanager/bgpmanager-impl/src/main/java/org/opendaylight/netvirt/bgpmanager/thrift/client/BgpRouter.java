@@ -303,7 +303,8 @@ public class BgpRouter {
         bop.asNumber = nbrAsNum;
         bop.strs[1] = md5Secret;
         dispatch(bop);
-    } // public addNeighbor( nbrIp, nbrAsNum, md5Secret )
+     // public addNeighbor( nbrIp, nbrAsNum, md5Secret )
+    } 
 
     public synchronized void delNeighbor(String nbrIp) throws TException, BgpRouterException {
         bop.type = Optype.NBR;
