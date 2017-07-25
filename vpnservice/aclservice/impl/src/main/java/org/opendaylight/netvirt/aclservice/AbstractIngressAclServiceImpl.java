@@ -336,9 +336,11 @@ public abstract class AbstractIngressAclServiceImpl extends AbstractAclServiceIm
         // Allow ICMPv6 Multicast Listener Query packets.
         List<MatchInfoBase> matches = AclServiceUtils.buildIcmpV6Matches(AclConstants.ICMPV6_TYPE_MLD_QUERY,
                 0, lportTag, ServiceModeIngress.class);
+        
+        String ICMPv6 = "Ingress_ICMPv6";
 
         String flowName =
-                "Ingress_ICMPv6" + "_" + dpId + "_" + lportTag + "_" + AclConstants.ICMPV6_TYPE_MLD_QUERY + permit;
+        		ICMPv6 + "_" + dpId + "_" + lportTag + "_" + AclConstants.ICMPV6_TYPE_MLD_QUERY + permit;
         syncFlow(dpId, NwConstants.EGRESS_ACL_TABLE, flowName, AclConstants.PROTO_IPV6_ALLOWED_PRIORITY, "ACL", 0,
                 0, AclConstants.COOKIE_ACL_BASE, matches, instructions, addOrRemove);
 
@@ -347,7 +349,7 @@ public abstract class AbstractIngressAclServiceImpl extends AbstractAclServiceIm
                 ServiceModeIngress.class);
 
         flowName =
-                "Ingress_ICMPv6" + "_" + dpId + "_" + lportTag + "_" + AclConstants.ICMPV6_TYPE_NS + permit;
+        		ICMPv6 + "_" + dpId + "_" + lportTag + "_" + AclConstants.ICMPV6_TYPE_NS + permit;
         syncFlow(dpId, NwConstants.EGRESS_ACL_TABLE, flowName, AclConstants.PROTO_IPV6_ALLOWED_PRIORITY, "ACL", 0,
                 0, AclConstants.COOKIE_ACL_BASE, matches, instructions, addOrRemove);
 
@@ -356,7 +358,7 @@ public abstract class AbstractIngressAclServiceImpl extends AbstractAclServiceIm
                 ServiceModeIngress.class);
 
         flowName =
-                "Ingress_ICMPv6" + "_" + dpId + "_" + lportTag + "_" + AclConstants.ICMPV6_TYPE_NA + permit;
+        		ICMPv6 + "_" + dpId + "_" + lportTag + "_" + AclConstants.ICMPV6_TYPE_NA + permit;
         syncFlow(dpId, NwConstants.EGRESS_ACL_TABLE, flowName, AclConstants.PROTO_IPV6_ALLOWED_PRIORITY, "ACL", 0,
                 0, AclConstants.COOKIE_ACL_BASE, matches, instructions, addOrRemove);
     }
