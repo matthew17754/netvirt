@@ -143,7 +143,7 @@ public class StatefulIngressAclServiceImpl extends AbstractIngressAclServiceImpl
                     NwConstants.EGRESS_ACL_REMOTE_ACL_TABLE));
             instructions.add(new InstructionApplyActions(actionsInfos));
             String flowName = "Ingress_Fixed_Conntrk_" + dpId + "_" + attachMac.getValue() + "_"
-                    + String.valueOf(attachIp.getValue()) + "_" + flowId;
+                    + String(attachIp.getValue()) + "_" + flowId;
             syncFlow(dpId, NwConstants.EGRESS_ACL_TABLE, flowName, AclConstants.PROTO_MATCH_PRIORITY, "ACL", 0, 0,
                     AclConstants.COOKIE_ACL_BASE, matches, instructions, addOrRemove);
         }
