@@ -89,7 +89,7 @@ public class BgpUtil {
                 retValue = af_afi.AFI_IP.getValue();
             }
         } catch (java.net.UnknownHostException e) {
-            /*if exception is catched then the prefix is not an IPv6 and IPv4*/
+            //if exception is catched then the prefix is not an IPv6 and IPv4
             LOG.error("Unrecognized ip address ipAddress: {}", argPrefix);
            //default afiValue is 1 (= ipv4)
             retValue = af_afi.AFI_IP.getValue();
