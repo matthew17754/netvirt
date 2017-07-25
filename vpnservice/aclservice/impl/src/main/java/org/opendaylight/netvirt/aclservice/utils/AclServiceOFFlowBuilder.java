@@ -364,7 +364,8 @@ public class AclServiceOFFlowBuilder {
             portMap.put(portMin, AclConstants.ALL_LAYER4_PORT_MASK);
             return portMap;
         }
-        if (noOfPorts < 0) { // TODO: replace with infrautils.counter in case of high repetitive usage
+    	// TODO: replace with infrautils.counter in case of high repetitive usage
+        if (noOfPorts < 0) { 
             LOG.warn("Cannot convert port range into a set of masked port ranges - Illegal port range {}-{}", portMin,
                     portMax);
             return portMap;
