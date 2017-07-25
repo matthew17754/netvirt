@@ -273,6 +273,7 @@ public abstract class AbstractEgressAclServiceImpl extends AbstractAclServiceImp
 
     protected abstract String syncSpecificAclFlow(BigInteger dpId, int lportTag, int addOrRemove, Ace ace,
             String portId, Map<String, List<MatchInfoBase>> flowMap, String flowName);
+    		String drop = "_Drop_";
 
     /**
      * Anti-spoofing rule to block the Ipv4 DHCP server traffic from the port.
@@ -287,7 +288,7 @@ public abstract class AbstractEgressAclServiceImpl extends AbstractAclServiceImp
         List<MatchInfoBase> matches = AclServiceUtils.buildDhcpMatches(AclConstants.DHCP_SERVER_PORT_IPV4,
                 AclConstants.DHCP_CLIENT_PORT_IPV4, lportTag, ServiceModeEgress.class);
 
-        String flowName = "Egress_DHCP_Server_v4" + dpId + "_" + lportTag + "_" + dhcpMacAddress + "_Drop_";
+        String flowName = "Egress_DHCP_Server_v4" + dpId + "_" + lportTag + "_" + dhcpMacAddress + drop;
         syncFlow(dpId, NwConstants.INGRESS_ACL_TABLE, flowName,
                 AclConstants.PROTO_DHCP_CLIENT_TRAFFIC_MATCH_PRIORITY, "ACL", 0,
                 0, AclConstants.COOKIE_ACL_BASE, matches, Collections.emptyList(), addOrRemove);
@@ -306,7 +307,7 @@ public abstract class AbstractEgressAclServiceImpl extends AbstractAclServiceImp
         List<MatchInfoBase> matches = AclServiceUtils.buildDhcpV6Matches(AclConstants.DHCP_SERVER_PORT_IPV6,
                 AclConstants.DHCP_CLIENT_PORT_IPV6, lportTag, ServiceModeEgress.class);
 
-        String flowName = "Egress_DHCP_Server_v6" + "_" + dpId + "_" + lportTag + "_" + dhcpMacAddress + "_Drop_";
+        String flowName = "Egress_DHCP_Server_v6" + "_" + dpId + "_" + lportTag + "_" + dhcpMacAddress + drop;
         syncFlow(dpId, NwConstants.INGRESS_ACL_TABLE, flowName,
                 AclConstants.PROTO_DHCP_CLIENT_TRAFFIC_MATCH_PRIORITY, "ACL", 0,
                 0, AclConstants.COOKIE_ACL_BASE, matches, Collections.emptyList(), addOrRemove);
@@ -323,7 +324,7 @@ public abstract class AbstractEgressAclServiceImpl extends AbstractAclServiceImp
         List<MatchInfoBase> matches = AclServiceUtils.buildIcmpV6Matches(AclConstants.ICMPV6_TYPE_RA, 0, lportTag,
                 ServiceModeEgress.class);
 
-        String flowName = "Egress_ICMPv6" + "_" + dpId + "_" + lportTag + "_" + AclConstants.ICMPV6_TYPE_RA + "_Drop_";
+        String flowName = "Egress_ICMPv6" + "_" + dpId + "_" + lportTag + "_" + AclConstants.ICMPV6_TYPE_RA + drop;
         syncFlow(dpId, NwConstants.INGRESS_ACL_TABLE, flowName, AclConstants.PROTO_IPV6_DROP_PRIORITY, "ACL", 0,
                 0, AclConstants.COOKIE_ACL_BASE, matches, Collections.emptyList(), addOrRemove);
     }
