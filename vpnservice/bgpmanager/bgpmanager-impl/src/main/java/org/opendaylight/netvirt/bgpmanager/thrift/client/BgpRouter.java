@@ -187,7 +187,8 @@ public class BgpRouter {
             case NBR:
                 if (bop.add) {
                     result = bgpClient.createPeer(op.strs[0], op.asNumber);
-                    if (result == 0 && op.strs[1] != null) { // createPeer worked and password is specified
+                 // createPeer worked and password is specified
+                    if (result == 0 && op.strs[1] != null) { 
                         result = bgpClient.setPeerSecret(op.strs[0], op.strs[1]);
                         if (result != 0) {
                             throw new BgpRouterException(BgpRouterException.Function.SET_PEER_SECRET, result);
