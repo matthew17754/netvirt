@@ -129,7 +129,7 @@ public class StatefulEgressAclServiceImpl extends AbstractEgressAclServiceImpl {
             instructions.add(new InstructionApplyActions(actionsInfos));
 
             String flowName = "Egress_Fixed_Conntrk_" + dpId + "_" + attachMac.getValue() + "_"
-                    + String.valueOf(attachIp.getValue()) + "_" + flowId;
+                    + String(attachIp.getValue()) + "_" + flowId;
             syncFlow(dpId, NwConstants.INGRESS_ACL_TABLE, flowName, AclConstants.PROTO_MATCH_PRIORITY, "ACL", 0, 0,
                     AclConstants.COOKIE_ACL_BASE, matches, instructions, addOrRemove);
         }
