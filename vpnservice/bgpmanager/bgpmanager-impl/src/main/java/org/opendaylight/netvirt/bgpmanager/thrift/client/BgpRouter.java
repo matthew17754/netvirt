@@ -144,8 +144,8 @@ public class BgpRouter {
     private BgpRouter() {
         bop = new BgpOp();
     }
-
-    private BgpRouter(BgpConfigurator.Client bgpClient) { // FOR UNIT TESTS ONLY
+    // FOR UNIT TESTS ONLY
+    private BgpRouter(BgpConfigurator.Client bgpClient) { 
         this.bgpClient = bgpClient;
         this.bop = new BgpOp();
     } // private ctor FOR UNIT TESTS ONLY
