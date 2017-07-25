@@ -336,6 +336,8 @@ public abstract class AbstractEgressAclServiceImpl extends AbstractAclServiceImp
      * @param lportTag the lport tag
      * @param addOrRemove add/remove the flow.
      */
+    	String permit = "_Permit_";
+    	
     private void egressAclIcmpv6AllowedList(BigInteger dpId, int lportTag, int addOrRemove) {
         List<ActionInfo> actionsInfos = new ArrayList<>();
         List<InstructionInfo> instructions = getDispatcherTableResubmitInstructions(actionsInfos);
@@ -343,7 +345,7 @@ public abstract class AbstractEgressAclServiceImpl extends AbstractAclServiceImp
         for (Integer icmpv6Type: AclConstants.allowedIcmpv6NdList()) {
             List<MatchInfoBase> matches = AclServiceUtils.buildIcmpV6Matches(icmpv6Type, 0, lportTag,
                     ServiceModeEgress.class);
-            String flowName = "Egress_ICMPv6" + "_" + dpId + "_" + lportTag + "_" + icmpv6Type + "_Permit_";
+            String flowName = "Egress_ICMPv6" + "_" + dpId + "_" + lportTag + "_" + icmpv6Type + permit;
             syncFlow(dpId, NwConstants.INGRESS_ACL_TABLE, flowName, AclConstants.PROTO_IPV6_ALLOWED_PRIORITY,
                     "ACL", 0, 0, AclConstants.COOKIE_ACL_BASE, matches, instructions, addOrRemove);
         }
@@ -366,7 +368,7 @@ public abstract class AbstractEgressAclServiceImpl extends AbstractAclServiceImp
         List<ActionInfo> actionsInfos = new ArrayList<>();
         List<InstructionInfo> instructions = getDispatcherTableResubmitInstructions(actionsInfos);
 
-        String flowName = "Egress_DHCP_Client_v4" + dpId + "_" + lportTag + "_" + dhcpMacAddress + "_Permit_";
+        String flowName = "Egress_DHCP_Client_v4" + dpId + "_" + lportTag + "_" + dhcpMacAddress + permit;
         syncFlow(dpId, NwConstants.INGRESS_ACL_TABLE, flowName, AclConstants.PROTO_DHCP_CLIENT_TRAFFIC_MATCH_PRIORITY,
             "ACL", 0, 0, AclConstants.COOKIE_ACL_BASE, matches, instructions, addOrRemove);
     }
@@ -388,7 +390,7 @@ public abstract class AbstractEgressAclServiceImpl extends AbstractAclServiceImp
         List<ActionInfo> actionsInfos = new ArrayList<>();
         List<InstructionInfo> instructions = getDispatcherTableResubmitInstructions(actionsInfos);
 
-        String flowName = "Egress_DHCP_Client_v6" + "_" + dpId + "_" + lportTag + "_" + dhcpMacAddress + "_Permit_";
+        String flowName = "Egress_DHCP_Client_v6" + "_" + dpId + "_" + lportTag + "_" + dhcpMacAddress + permit;
         syncFlow(dpId, NwConstants.INGRESS_ACL_TABLE, flowName, AclConstants.PROTO_DHCP_CLIENT_TRAFFIC_MATCH_PRIORITY,
             "ACL", 0, 0, AclConstants.COOKIE_ACL_BASE, matches, instructions, addOrRemove);
     }
