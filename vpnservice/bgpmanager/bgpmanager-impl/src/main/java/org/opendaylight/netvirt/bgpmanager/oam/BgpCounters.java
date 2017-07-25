@@ -59,6 +59,7 @@ public class BgpCounters extends TimerTask {
     }
     
     String cmdBGPsummary = "cmd_ip_bgp_summary.txt";
+    String bgpIPv4UnicastStatistics = "cmd_bgp_ipv4_unicast_statistics.txt";
     
     @Override
     public void run() {
@@ -66,7 +67,7 @@ public class BgpCounters extends TimerTask {
             LOG.debug("Fetching counters from BGP");
             resetCounters();
             fetchCmdOutputs(cmdBGPsummary, "show ip bgp summary");
-            fetchCmdOutputs("cmd_bgp_ipv4_unicast_statistics.txt", "show bgp ipv4 unicast statistics");
+            fetchCmdOutputs(bgpIPv4UnicastStatistics, "show bgp ipv4 unicast statistics");
             fetchCmdOutputs(BGP_VPNV4_FILE, "show ip bgp vpnv4 all");
             fetchCmdOutputs(BGP_VPNV6_FILE, "show ip bgp vpnv6 all");
             fetchCmdOutputs(BGP_EVPN_FILE, "show bgp l2vpn evpn all");
@@ -266,7 +267,7 @@ public class BgpCounters extends TimerTask {
      */
 
     private void parseBgpIpv4UnicastStatistics() {
-        File file = new File("cmd_bgp_ipv4_unicast_statistics.txt");
+        File file = new File(bgpIPv4UnicastStatistics);
         String totPfx = "";
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
@@ -431,7 +432,7 @@ public class BgpCounters extends TimerTask {
     private void resetCounters() {
         countersMap.clear();
         resetFile(cmdBGPsummary);
-        resetFile("cmd_bgp_ipv4_unicast_statistics.txt");
+        resetFile(bgpIPv4UnicastStatistics);
         resetFile(BGP_VPNV4_FILE);
         resetFile(BGP_VPNV6_FILE);
         resetFile(BGP_EVPN_FILE);
